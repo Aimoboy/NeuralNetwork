@@ -120,3 +120,13 @@ class Matrix:
                 new_matrix.values[i][j] = self.values[i][j]
         
         return new_matrix
+
+    def apply_function(self, f):
+        new_matrix = self.copy()
+
+        # Apply function
+        for i in range(self.rows):
+            for j in range(self.cols):
+                new_matrix.values[i][j] = f(new_matrix.values[i][j])
+        
+        return new_matrix
