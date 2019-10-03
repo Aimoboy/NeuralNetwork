@@ -19,42 +19,6 @@ class Matrix:
         # Return size of matrix
         return m, n
     
-    def draw(self):
-        # Settings
-        space_between_elems = 1
-
-        # Find the longest element
-        longest_elem = 0
-        for i in range(self.rows):
-            for j in range(self.cols):
-                l = len(str(self.values[i][j]))
-                if l > longest_elem:
-                    longest_elem = l
-        
-        # Draw top of box
-        print("*", end="")
-        print("-" * (self.cols * longest_elem + (self.cols - 1) * space_between_elems), end="")
-        print("*")
-
-        # Draw middle of box
-        for i in range(self.rows):
-            print("|", end="")
-
-            for j in range(self.cols):
-                print(self.values[i][j], end="")
-                space_num = longest_elem - len(str(self.values[i][j]))
-                print(" " * space_num, end="")
-                if j != self.cols - 1:
-                    print(" " * space_between_elems, end="")
-                    
-
-            print("|")
-        
-        # Draw bottom of box
-        print("*", end="")
-        print("-" * (self.cols * longest_elem + (self.cols - 1) * space_between_elems), end="")
-        print("*")
-
     @staticmethod
     def zero_matrix(rows, cols):
         if rows == 0 or cols == 0:
@@ -68,3 +32,43 @@ class Matrix:
             values.append(temp)
         
         return Matrix(values)
+    
+    def __str__(self):
+        # Settings
+        space_between_elems = 1
+
+        s = ""
+
+        # Find the longest element
+        longest_elem = 0
+        for i in range(self.rows):
+            for j in range(self.cols):
+                l = len(str(self.values[i][j]))
+                if l > longest_elem:
+                    longest_elem = l
+        
+        # Draw top of box
+        s += "*"
+        s += "-" * (self.cols * longest_elem + (self.cols - 1) * space_between_elems)
+        s += "*\n"
+
+        # Draw middle of box
+        for i in range(self.rows):
+            s += "|"
+
+            for j in range(self.cols):
+                s += str(self.values[i][j])
+                space_num = longest_elem - len(str(self.values[i][j]))
+                s += " " * space_num
+                if j != self.cols - 1:
+                    s += " " * space_between_elems
+                    
+
+            s += "|\n"
+        
+        # Draw bottom of box
+        s += "*"
+        s += "-" * (self.cols * longest_elem + (self.cols - 1) * space_between_elems)
+        s += "*\n"
+
+        return s
