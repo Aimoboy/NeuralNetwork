@@ -69,6 +69,54 @@ class Matrix:
         # Draw bottom of box
         s += "*"
         s += "-" * (self.cols * longest_elem + (self.cols - 1) * space_between_elems)
-        s += "*\n"
+        s += "*"
 
         return s
+    
+    def __mul__(self, other):
+        # If matrix
+        if type(other) is Matrix:
+            return self.multiply_matrix(other)
+        
+        # If scalar
+        if type(other) is int or type(other) is float:
+            return self.multiply_scalar(other)
+    
+    def __rmul__(self, other):
+        # If scalar
+        if type(other) is int or type(other) is float:
+            return self.multiply_scalar(other)
+    
+    def multiply_matrix(self, m):
+        # Check dimensions
+        if self.cols != m.rows:
+            raise Exception("Matrices have the wrong dimensions for multiplication.")
+
+        # Calculate new matrix
+        new_matrix = Matrix.zero_matrix(self.rows, m.cols)
+        for i in range(new_matrix.rows):
+            for j in range(new_matrix.cols):
+                for k in range(self.cols):
+                    new_matrix.values[i][j] += self.values[i][k] * m.values[k][j]
+        
+        # Return result
+        return new_matrix
+    
+    def multiply_scalar(self, s):
+        new_matrix = self.copy()
+
+        # Multiply scalar
+        for i in range(self.rows):
+            for j in range(self.cols):
+                new_matrix.values[i][j] *= s
+        
+        return new_matrix
+    
+    def copy(self):
+        new_matrix = Matrix.zero_matrix(self.rows, self.cols)
+
+        for i in range(self.rows):
+            for j in range(self.cols):
+                new_matrix.values[i][j] = self.values[i][j]
+        
+        return new_matrix
