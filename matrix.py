@@ -87,6 +87,17 @@ class Matrix:
         if type(other) is int or type(other) is float:
             return self.multiply_scalar(other)
     
+    def __eq__(self, other):
+        same = True
+
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.values[i][j] != other.values[i][j]:
+                    same = False
+        
+        return same
+
+    
     def multiply_matrix(self, m):
         # Check dimensions
         if self.cols != m.rows:
