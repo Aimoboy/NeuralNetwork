@@ -3,7 +3,7 @@ sys.path.insert(1, '../')
 from matrix import Matrix
 import unittest
 
-class MultiplicationTest(unittest.TestCase):
+class MatrixTest(unittest.TestCase):
     def test_matrix_multiplication(self):
         m1 = Matrix([[1, 2, 3], [4, 5, 6]])
         m2 = Matrix([[1, 2], [3, 4], [5, 6]])
@@ -38,3 +38,9 @@ class MultiplicationTest(unittest.TestCase):
         m = m.apply_function(f)
         m_expect = Matrix([[1, 4], [9, 16]])
         self.assertEqual(m_expect, m)
+    
+    def test_add(self):
+        m1 = Matrix([[1, 2], [3, 4]])
+        m2 = Matrix([[1, 1], [2, 2]])
+        m_expect = Matrix([[2, 3], [5, 6]])
+        self.assertEqual(m_expect, m1 + m2)

@@ -96,6 +96,9 @@ class Matrix:
                     same = False
         
         return same
+    
+    def __add__(self, other):
+        return self.add(other)
 
     
     def multiply_matrix(self, m):
@@ -139,5 +142,17 @@ class Matrix:
         for i in range(self.rows):
             for j in range(self.cols):
                 new_matrix.values[i][j] = f(new_matrix.values[i][j])
+        
+        return new_matrix
+    
+    def add(self, m):
+        if self.rows != m.rows or self.cols != m.cols:
+            raise Exception("Matrices have the wrong dimensions for addition.")
+
+        new_matrix = self.copy()
+
+        for i in range(self.rows):
+            for j in range(self.cols):
+                new_matrix.values[i][j] += m.values[i][j]
         
         return new_matrix
