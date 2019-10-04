@@ -99,6 +99,9 @@ class Matrix:
     
     def __add__(self, other):
         return self.add(other)
+    
+    def __pow__(self, other):
+        return self.elementwise_multiplication(other)
 
     
     def multiply_matrix(self, m):
@@ -154,5 +157,14 @@ class Matrix:
         for i in range(self.rows):
             for j in range(self.cols):
                 new_matrix.values[i][j] += m.values[i][j]
+        
+        return new_matrix
+    
+    def elementwise_multiplication(self, m):
+        new_matrix = self.copy()
+
+        for i in range(self.rows):
+            for j in range(self.cols):
+                new_matrix.values[i][j] *= m.values[i][j]
         
         return new_matrix

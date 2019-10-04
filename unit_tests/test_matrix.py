@@ -44,3 +44,9 @@ class MatrixTest(unittest.TestCase):
         m2 = Matrix([[1, 1], [2, 2]])
         m_expect = Matrix([[2, 3], [5, 6]])
         self.assertEqual(m_expect, m1 + m2)
+    
+    def test_elementwise_mul(self):
+        m1 = Matrix([[1, 2], [3, 4]])
+        m2 = Matrix([[1, 1], [2, 2]])
+        m_expect = Matrix([[1, 2], [6, 8]])
+        self.assertEqual(m_expect, m1 ** m2)
