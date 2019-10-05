@@ -1,3 +1,5 @@
+import random
+
 class Matrix:
     def __init__(self, values):
         self.values = values
@@ -29,6 +31,20 @@ class Matrix:
             temp = []
             for j in range(cols):
                 temp.append(0)
+            values.append(temp)
+        
+        return Matrix(values)
+    
+    @staticmethod
+    def random_matrix(rows, cols, a, b):
+        if rows == 0 or cols == 0:
+            raise Exception("Rows and columns have to be larger than zero.")
+
+        values = []
+        for i in range(rows):
+            temp = []
+            for j in range(cols):
+                temp.append(random.uniform(a, b))
             values.append(temp)
         
         return Matrix(values)
